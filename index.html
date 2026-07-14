@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undangan Pertemuan Keluarga Bani Naruwi</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+    <style>
+        /* ── Reset & Base ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0e0b08;
+            font-family: 'Cormorant Garamond', serif;
+            padding: 20px;
+            background-image: radial-gradient(circle at 20% 30%, #2a221b 0%, #0a0806 90%);
+            overflow-x: hidden;
+        }
+
+        /* ── Kartu Utama ── */
+        .invitation {
+            max-width: 920px;
+            width: 100%;
+            background: #fcf8f0;
+            background-image: linear-gradient(165deg, #fffcf5 0%, #f5ede1 100%);
+            border-radius: 56px 56px 48px 48px;
+            padding: 50px 50px 48px;
+            position: relative;
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(212, 175, 55, 0.3) inset, 0 0 0 8px #dac29c, 0 0 0 10px #b89464;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            animation: fadeInUp 1.2s ease forwards;
+            transform: translateY(30px);
+            opacity: 0;
+        }
+
+        .invitation:hover {
+            transform: scale(1.008);
+            box-shadow: 0 60px 120px rgba(0, 0, 0, 0.9), 0 0 0 1px #d4af37 inset;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Shimmer emas ── */
+        .shimmer-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #d4af37, #f9e08a, #d4af37, transparent);
+            background-size: 300% 100%;
+            animation: shimmerGold 4s infinite linear;
+            border-radius: 56px 56px 0 0;
+        }
+
+        @keyframes shimmerGold {
+            0% {
+                background-position: -300% 0;
+            }
+            100% {
+                background-position: 300% 0;
+            }
+        }
+
+        /* ── Ornamen sudut ── */
+        .corner {
+            position: absolute;
+            font-size: 32px;
+            color: #d4af37;
+            opacity: 0.5;
+            animation: floatGlow 3s ease-in-out infinite alternate;
+        }
+        .corner-tl {
+            top: 24px;
+            left: 28px;
+        }
+        .corner-tr {
+            top: 24px;
+            right: 28px;
+            transform: rotate(90deg);
+        }
+        .corner-bl {
+            bottom: 24px;
+            left: 28px;
+            transform: rotate(-90deg);
+        }
+        .corner-br {
+            bottom: 24px;
+            right: 28px;
+            transform: rotate(180deg);
+        }
+
+        @keyframes floatGlow {
+            0% {
+                opacity: 0.3;
+                transform: scale(0.95) rotate(0deg);
+            }
+            100% {
+                opacity: 0.8;
+                transform: scale(1.1) rotate(5deg);
+            }
+        }
+
+        /* ── Tipografi Arab ── */
+        .arabic-script {
+            font-family: 'Amiri', 'Times New Roman', serif;
+            text-align: center;
+            color: #8b6f3c;
+            line-height: 1.6;
+            text-shadow: 0 1px 4px rgba(180, 130, 70, 0.15);
+        }
+
+        .arabic-large {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 2px;
+        }
+
+        .arabic-medium {
+            font-size: 26px;
+            font-weight: 400;
+            margin-bottom: 2px;
+        }
+
+        .arabic-small {
+            font-size: 20px;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        /* ── Header ── */
+        .header {
+            text-align: center;
+            border-bottom: 2px dashed #dac29c;
+            padding-bottom: 16px;
+            margin: 8px 0 16px;
+        }
+
+        .header .label {
+            font-size: 16px;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            color: #a88454;
+            font-weight: 400;
+            font-family: 'Cormorant Garamond', serif;
+            animation: fadeIn 1.8s ease;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', 'Georgia', serif;
+            font-size: 58px;
+            font-weight: 700;
+            color: #3d2a1a;
+            letter-spacing: 4px;
+            margin: 4px 0;
+            animation: fadeIn 2s ease;
+        }
+
+        .header h1 .highlight {
+            background: linear-gradient(135deg, #d4af37, #b8863a, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-style: italic;
+        }
+
+        .header .sub-label {
+            font-size: 24px;
+            color: #7a623f;
+            letter-spacing: 8px;
+            font-weight: 300;
+            margin-top: -2px;
+            animation: fadeIn 2.2s ease;
+        }
+
+        /* ── Badan ── */
+        .body {
+            text-align: center;
+            padding: 4px 0 6px;
+        }
+
+        /* Pembukaan panjang (sekarang di bawah header) */
+        .opening-section {
+            margin-top: 6px;
+            animation: fadeIn 2.4s ease;
+        }
+
+        .opening-text {
+            font-size: 20px;
+            color: #4d3824;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 12px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .opening-text .arabic-inline {
+            font-family: 'Amiri', serif;
+            font-size: 28px;
+            color: #b8863a;
+            display: inline-block;
+            margin: 0 4px;
+        }
+
+        .title-event {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            font-weight: 700;
+            color: #2c1e12;
+            margin: 8px 0 12px;
+            animation: fadeIn 2.6s ease;
+        }
+
+        .title-event .accent {
+            color: #b8863a;
+            font-weight: 400;
+        }
+
+        /* ── Countdown ── */
+        .countdown-wrapper {
+            background: rgba(218, 192, 154, 0.2);
+            border-radius: 80px;
+            padding: 16px 24px;
+            margin: 12px 0 18px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            backdrop-filter: blur(4px);
+            display: inline-block;
+            width: auto;
+            animation: fadeIn 2.8s ease;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            text-align: center;
+        }
+
+        .countdown-item .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 44px;
+            font-weight: 700;
+            color: #3d2a1a;
+            line-height: 1;
+            background: linear-gradient(135deg, #b8863a, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .countdown-item .label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #8b7355;
+            font-weight: 600;
+        }
+
+        .countdown-separator {
+            font-size: 32px;
+            color: #d4af37;
+            align-self: center;
+            font-weight: 300;
+            opacity: 0.6;
+        }
+
+        /* ── Detail Waktu & Tempat ── */
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px 40px;
+            margin: 10px 0 16px;
+            background: rgba(218, 192, 154, 0.12);
+            padding: 14px 28px;
+            border-radius: 60px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            animation: fadeIn 3s ease;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .detail-item .icon {
+            font-size: 34px;
+            line-height: 1;
+        }
+
+        .detail-item .info .label-sm {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #8b7355;
+            font-weight: 600;
+        }
+
+        .detail-item .info .value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c1e12;
+            line-height: 1.2;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .detail-item .info .value .day {
+            font-weight: 400;
+            color: #8b6f4a;
+            font-size: 22px;
+        }
+
+        /* ── Alamat ── */
+        .address-box {
+            background: #e8dccb;
+            border-radius: 60px;
+            padding: 14px 34px;
+            display: inline-block;
+            margin: 4px 0 14px;
+            border: 1px solid #dac29c;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            animation: fadeIn 3.2s ease;
+        }
+
+        .address-box .addr-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #7a623f;
+            font-weight: 600;
+        }
+
+        .address-box .addr-value {
+            font-size: 30px;
+            font-weight: 700;
+            color: #3d2a1a;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .address-box .addr-value .name {
+            color: #b8863a;
+        }
+
+        /* ── Doa / Pesan ── */
+        .prayer {
+            font-family: 'Amiri', serif;
+            font-size: 30px;
+            color: #8b6f3c;
+            text-align: center;
+            margin: 8px 0 4px;
+            line-height: 1.7;
+            animation: fadeIn 3.4s ease;
+        }
+
+        .message {
+            font-size: 21px;
+            color: #4d3824;
+            line-height: 1.8;
+            max-width: 620px;
+            margin: 6px auto 12px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            animation: fadeIn 3.6s ease;
+        }
+
+        .message .quran {
+            font-family: 'Amiri', serif;
+            font-size: 28px;
+            color: #b8863a;
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            margin-top: 22px;
+            padding-top: 20px;
+            border-top: 2px dashed #dac29c;
+            text-align: center;
+            animation: fadeIn 3.8s ease;
+        }
+
+        .footer .contact {
+            font-size: 20px;
+            color: #3d2a1a;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .footer .contact a {
+            color: #b8863a;
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px dashed #d4af37;
+            padding-bottom: 2px;
+            transition: all 0.3s;
+            font-size: 22px;
+        }
+
+        .footer .contact a:hover {
+            color: #8b6f3c;
+            border-bottom-style: solid;
+        }
+
+        .footer .contact .wa-icon {
+            font-size: 28px;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        .footer .rsvp {
+            font-size: 18px;
+            color: #7a623f;
+            letter-spacing: 2px;
+            font-weight: 400;
+            margin-top: 6px;
+        }
+
+        .footer .rsvp strong {
+            color: #3d2a1a;
+            font-weight: 700;
+        }
+
+        .footer .bottom-ornament {
+            margin-top: 16px;
+            font-size: 22px;
+            color: #b89464;
+            letter-spacing: 12px;
+            opacity: 0.5;
+            animation: floatGlow 4s ease-in-out infinite alternate;
+        }
+
+        .footer .closing-arab {
+            font-family: 'Amiri', serif;
+            font-size: 28px;
+            color: #8b6f3c;
+            margin-top: 8px;
+        }
+
+        .footer .closing-arab small {
+            font-size: 20px;
+            opacity: 0.7;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Responsif ── */
+        @media (max-width: 768px) {
+            .invitation {
+                padding: 28px 18px 32px;
+                border-radius: 36px 36px 28px 28px;
+            }
+            .corner {
+                display: none;
+            }
+            .header h1 {
+                font-size: 40px;
+            }
+            .header .sub-label {
+                font-size: 18px;
+                letter-spacing: 4px;
+            }
+            .title-event {
+                font-size: 28px;
+            }
+            .arabic-large {
+                font-size: 28px;
+            }
+            .arabic-medium {
+                font-size: 20px;
+            }
+            .arabic-small {
+                font-size: 16px;
+            }
+            .countdown-item .number {
+                font-size: 34px;
+            }
+            .countdown {
+                gap: 12px;
+            }
+            .countdown-separator {
+                font-size: 24px;
+            }
+            .details {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                padding: 14px 16px;
+                border-radius: 40px;
+            }
+            .detail-item .info .value {
+                font-size: 22px;
+            }
+            .address-box .addr-value {
+                font-size: 22px;
+            }
+            .address-box {
+                padding: 10px 20px;
+            }
+            .opening-text {
+                font-size: 17px;
+            }
+            .prayer {
+                font-size: 22px;
+            }
+            .message {
+                font-size: 17px;
+            }
+            .footer .contact {
+                font-size: 17px;
+            }
+            .footer .contact a {
+                font-size: 18px;
+            }
+            .footer .closing-arab {
+                font-size: 22px;
+            }
+            .shimmer-line {
+                height: 3px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .invitation {
+                padding: 20px 12px 24px;
+                border-radius: 28px 28px 20px 20px;
+            }
+            .header h1 {
+                font-size: 30px;
+                letter-spacing: 2px;
+            }
+            .header .sub-label {
+                font-size: 14px;
+                letter-spacing: 3px;
+            }
+            .title-event {
+                font-size: 22px;
+            }
+            .arabic-large {
+                font-size: 22px;
+            }
+            .arabic-medium {
+                font-size: 18px;
+            }
+            .arabic-small {
+                font-size: 14px;
+            }
+            .countdown-item .number {
+                font-size: 26px;
+            }
+            .countdown-item .label {
+                font-size: 10px;
+                letter-spacing: 1px;
+            }
+            .countdown-separator {
+                font-size: 18px;
+            }
+            .detail-item .info .value {
+                font-size: 18px;
+            }
+            .address-box .addr-value {
+                font-size: 18px;
+            }
+            .opening-text {
+                font-size: 15px;
+            }
+            .prayer {
+                font-size: 18px;
+            }
+            .message {
+                font-size: 15px;
+            }
+            .footer .contact {
+                font-size: 15px;
+            }
+            .footer .contact a {
+                font-size: 16px;
+            }
+            .footer .closing-arab {
+                font-size: 18px;
+            }
+            .footer .bottom-ornament {
+                letter-spacing: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invitation">
+
+        <!-- Shimmer line atas -->
+        <div class="shimmer-line"></div>
+
+        <!-- Ornamen sudut -->
+        <div class="corner corner-tl">✦</div>
+        <div class="corner corner-tr">✦</div>
+        <div class="corner corner-bl">✦</div>
+        <div class="corner corner-br">✦</div>
+
+        <!-- ===== HEADER (Bani Naruwi di atas) ===== -->
+        <div class="header">
+            <div class="label">— Undangan —</div>
+            <h1>
+                Bani <span class="highlight">Naruwi</span>
+            </h1>
+            <div class="sub-label">✿ Keluarga Besar ✿</div>
+        </div>
+
+        <!-- ===== PEMBUKAAN (sekarang di bawah header) ===== -->
+        <div class="opening-section">
+            <div class="arabic-script arabic-large">
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+            </div>
+            <div class="arabic-script arabic-medium">
+                الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+            </div>
+            <div class="arabic-script arabic-small">
+                وَالصَّلَاةُ وَالسَّلَامُ عَلَىٰ أَشْرَفِ الْأَنْبِيَاءِ وَالْمُرْسَلِينَ
+            </div>
+            <div class="arabic-script arabic-small" style="margin-bottom: 6px;">
+                سَيِّدِنَا مُحَمَّدٍ وَعَلَىٰ آلِهِ وَصَحْبِهِ أَجْمَعِينَ
+            </div>
+
+            <!-- Paragraf pembuka dalam bahasa Indonesia -->
+            <div class="opening-text">
+                <span class="arabic-inline">﴾</span>
+                Segala puji bagi Allah Yang Maha Pengasih lagi Maha Penyayang, yang telah mempertemukan kita dalam ikatan keluarga yang penuh berkah.
+                Shalawat serta salam semoga tercurah kepada junjungan kita Nabi Muhammad SAW, beserta keluarga dan para sahabatnya.
+                <span class="arabic-inline">﴿</span>
+                <br /><br />
+                Dengan penuh rasa syukur dan kerendahan hati, kami sekeluarga besar
+                <strong>Bani Naruwi</strong> bermaksud mengundang Bapak/Ibu/Saudara/i
+                untuk hadir dalam acara <strong>Pertemuan Keluarga</strong> yang insya Allah
+                akan diselenggarakan pada:
+            </div>
+        </div>
+
+        <!-- ===== BADAN UTAMA ===== -->
+        <div class="body">
+
+            <!-- Title event -->
+            <div class="title-event">
+                <span class="accent">◈</span> Pertemuan Keluarga <span class="accent">◈</span>
+            </div>
+
+            <!-- Countdown -->
+            <div class="countdown-wrapper">
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <div class="number" id="days">00</div>
+                        <div class="label">Hari</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div class="number" id="hours">00</div>
+                        <div class="label">Jam</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div class="number" id="minutes">00</div>
+                        <div class="label">Menit</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div class="number" id="seconds">00</div>
+                        <div class="label">Detik</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detail Waktu -->
+            <div class="details">
+                <div class="detail-item">
+                    <div class="icon">📅</div>
+                    <div class="info">
+                        <div class="label-sm">Hari &amp; Tanggal</div>
+                        <div class="value">
+                            Jumat, <span class="day">17</span> Juli <span class="day">2026</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-item">
+                    <div class="icon">⏰</div>
+                    <div class="info">
+                        <div class="label-sm">Waktu</div>
+                        <div class="value">16.00 <span style="font-weight:400;font-size:0.6em;color:#8b6f4a;">WIB</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lokasi -->
+            <div class="address-box">
+                <div class="addr-label">🏠 Bertempat di</div>
+                <div class="addr-value">
+                    Rumah Bapak <span class="name">Makhrudi</span> &amp; Ibu <span class="name">Ribut Hariani</span>
+                </div>
+            </div>
+
+            <!-- Doa & Pesan -->
+            <div class="prayer">
+                اللَّهُمَّ بَارِكْ لَنَا فِي اجْتِمَاعِنَا وَارْزُقْنَا الْخَيْرَ وَالْبَرَكَةَ
+            </div>
+            <div class="message">
+                <span class="quran">﴾</span>
+                Marilah kita penuhi undangan ini sebagai wujud kasih sayang dan tali persaudaraan.
+                Semoga pertemuan ini menjadi ladang amal dan kebahagiaan bagi kita semua.
+                <span class="quran">﴿</span>
+            </div>
+
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="footer">
+            <div class="contact">
+                <span class="wa-icon">📱</span> Konfirmasi kehadiran via WhatsApp:
+                <a href="https://wa.me/6285177445749" target="_blank">
+                    +62 851-7744-5749
+                </a>
+                <br style="display: none;" class="mobile-break" />
+                <span style="font-weight: 400; color: #7a623f; font-size: 0.9em;">
+                    (Bapak Makhrudi / Ibu Ribut Hariani)
+                </span>
+            </div>
+
+            <div class="rsvp">
+                <span>✿</span> Kami sangat menantikan kehadiran Bapak/Ibu/Saudara sekalian <span>✿</span>
+            </div>
+
+            <!-- Penutupan Arab -->
+            <div class="closing-arab">
+                وَالسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ
+                <br />
+                <small>جَزَاكُمُ اللَّهُ خَيْرًا</small>
+            </div>
+
+            <div class="bottom-ornament">
+                ✦ ✦ ✦ ✦ ✦ ✦
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        (function() {
+            // Target: 17 Juli 2026 jam 16:00 WIB (UTC+7)
+            const target = new Date('2026-07-17T16:00:00+07:00').getTime();
+
+            function updateCountdown() {
+                const now = Date.now();
+                let diff = target - now;
+
+                if (diff <= 0) {
+                    document.getElementById('days').textContent = '00';
+                    document.getElementById('hours').textContent = '00';
+                    document.getElementById('minutes').textContent = '00';
+                    document.getElementById('seconds').textContent = '00';
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                diff -= days * 1000 * 60 * 60 * 24;
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                diff -= hours * 1000 * 60 * 60;
+                const minutes = Math.floor(diff / (1000 * 60));
+                diff -= minutes * 1000 * 60;
+                const seconds = Math.floor(diff / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        })();
+    </script>
+
+</body>
+</html>
