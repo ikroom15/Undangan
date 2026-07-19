@@ -1069,7 +1069,7 @@
                     <div class="form-group">
                         <label>Hari & Tanggal Ambil <span class="required">*</span></label>
                         <input type="datetime-local" id="pickupTime" />
-                        <div class="hint">Pilih hari dan jam kamu akan mengambil donut.</div>
+                        <div class="hint" id="pickupHint">Minimal 30 menit dari sekarang.</div>
                     </div>
                 </div>
                 <div class="conditional-field" id="kirimField">
@@ -1153,7 +1153,6 @@
         // 2. STATE
         // =============================================
         let cart = [];
-        // selectedToppings[productId] = array of topping names (max 2, in order of selection)
         let selectedToppings = {};
 
         // DOM refs
@@ -1178,6 +1177,7 @@
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMessage');
         const finishBtn = document.getElementById('finishSelection');
+        const pickupHint = document.getElementById('pickupHint');
 
         let toastTimer = null;
 
@@ -1187,7 +1187,6 @@
         function renderProducts() {
             grid.innerHTML = '';
             products.forEach(p => {
-                // Inisialisasi state topping untuk produk ini
                 if (!selectedToppings[p.id]) {
                     selectedToppings[p.id] = [];
                 }
@@ -1265,7 +1264,6 @@
                 card.appendChild(actions);
                 grid.appendChild(card);
 
-                // Update tampilan awal topping
                 updateToppingBadges(p.id);
             });
         }
@@ -1278,20 +1276,15 @@
             const index = current.indexOf(topping);
 
             if (index !== -1) {
-                // Topping sudah aktif, hapus (unselect)
                 current.splice(index, 1);
             } else {
-                // Topping belum aktif
                 if (current.length < 2) {
-                    // Masih ada slot, tambahkan
                     current.push(topping);
                 } else {
-                    // Sudah 2 topping, hapus yang pertama lalu tambahkan yang baru
                     current.shift();
                     current.push(topping);
                 }
             }
-            // Simpan kembali
             selectedToppings[productId] = current;
             updateToppingBadges(productId);
         }
@@ -1304,7 +1297,6 @@
                 const isActive = active.includes(t);
                 btn.classList.toggle('active', isActive);
                 btn.style.borderColor = isActive ? 'var(--gold)' : 'rgba(201,168,76,0.15)';
-                // Tampilkan urutan (1 atau 2) jika aktif
                 const badge = btn.querySelector('.qty-badge');
                 if (badge) {
                     if (isActive) {
@@ -1318,7 +1310,7 @@
         }
 
         // =============================================
-        // 5. PREPARATION QUANTITY (hanya ubah angka)
+        // 5. PREPARATION QUANTITY
         // =============================================
         function changePreparationQty(productId, delta) {
             const qtyEl = document.getElementById(`qty-${productId}`);
@@ -1349,7 +1341,6 @@
 
             const toppingStr = activeToppings.map(t => `${t}`).join(', ');
 
-            // Cari item dengan productId dan topping yang sama persis (urutan tidak penting)
             const existing = cart.find(item =>
                 item.productId === productId &&
                 JSON.stringify(item.toppings.sort()) === JSON.stringify([...activeToppings].sort())
@@ -1362,14 +1353,13 @@
                     productId: productId,
                     productName: product.name,
                     image: product.image,
-                    toppings: [...activeToppings], // copy
+                    toppings: [...activeToppings],
                     toppingsDisplay: toppingStr,
                     quantity: qty,
                     price: product.price
                 });
             }
 
-            // Reset preparation qty dan topping
             qtyEl.textContent = '0';
             selectedToppings[productId] = [];
             updateToppingBadges(productId);
@@ -1379,7 +1369,7 @@
         }
 
         // =============================================
-        // 7. CART OPERATIONS (event delegation)
+        // 7. CART OPERATIONS
         // =============================================
         function renderCart() {
             const totalItems = cart.reduce((sum, i) => sum + i.quantity, 0);
@@ -1428,7 +1418,6 @@
             cartTotal.textContent = `Rp ${grandTotal.toLocaleString('id-ID')}`;
         }
 
-        // Event delegation untuk tombol di keranjang
         cartBody.addEventListener('click', function(e) {
             const target = e.target.closest('button');
             if (!target) return;
@@ -1506,14 +1495,63 @@
         });
 
         // =============================================
-        // 9. CHECKOUT MODAL
+        // 9. CHECKOUT MODAL dengan validasi waktu 30 menit
         // =============================================
-        checkoutBtn.addEventListener('click', () => {
-            if (cart.length === 0) return;
+        // Fungsi untuk mengatur nilai default pickupTime = sekarang + 30 menit
+        function setDefaultPickupTime() {
             const now = new Date();
-            now.setHours(now.getHours() + 1);
+            now.setMinutes(now.getMinutes() + 30);
+            // Pembulatan ke menit (hilangkan detik)
+            now.setSeconds(0);
+            now.setMilliseconds(0);
             const iso = now.toISOString().slice(0, 16);
             pickupTime.value = iso;
+            // Simpan batas minimal (untuk validasi)
+            pickupTime.dataset.minTime = iso;
+            updatePickupHint(now);
+        }
+
+        function updatePickupHint(minDate) {
+            if (!minDate) {
+                const val = pickupTime.value;
+                if (val) {
+                    minDate = new Date(val);
+                } else {
+                    minDate = new Date();
+                    minDate.setMinutes(minDate.getMinutes() + 30);
+                }
+            }
+            const formatted = minDate.toLocaleString('id-ID', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            pickupHint.textContent = `⏰ Minimal 30 menit dari sekarang (${formatted})`;
+        }
+
+        // Validasi saat input berubah
+        pickupTime.addEventListener('change', function() {
+            const selected = new Date(this.value);
+            const now = new Date();
+            const minTime = new Date(now.getTime() + 30 * 60 * 1000);
+            if (selected < minTime) {
+                showToast('Waktu pengambilan harus minimal 30 menit dari sekarang!', 'warning');
+                // Set ulang ke default
+                setDefaultPickupTime();
+            } else {
+                updatePickupHint(selected);
+            }
+        });
+
+        // Saat tombol checkout diklik, set default dan buka modal
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) return;
+            // Set default waktu
+            setDefaultPickupTime();
+            // Reset form lainnya
             custName.value = '';
             deliveryAddress.value = '';
             custNote.value = '';
@@ -1567,6 +1605,16 @@
                 const dt = pickupTime.value;
                 if (!dt) {
                     showToast('Pilih hari & jam ambil!', 'warning');
+                    pickupTime.focus();
+                    return;
+                }
+                // Validasi ulang 30 menit
+                const selected = new Date(dt);
+                const now = new Date();
+                const minTime = new Date(now.getTime() + 30 * 60 * 1000);
+                if (selected < minTime) {
+                    showToast('Waktu pengambilan harus minimal 30 menit dari sekarang!', 'warning');
+                    setDefaultPickupTime();
                     pickupTime.focus();
                     return;
                 }
@@ -1674,7 +1722,7 @@
             }
         });
 
-        console.log('🍩 De\'Royale Donuts siap! (Maks. 2 topping per donut)');
+        console.log('🍩 De\'Royale Donuts siap! (Maks. 2 topping, min. 30 menit ambil)');
     </script>
 
 </body>
